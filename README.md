@@ -1,65 +1,59 @@
-# DOCKER-COMPOSE TEMPLATE
+# MICROSERVICIOS DE BENEFICIARIOS MUSERPOL
 
-Plantilla para dockerizar un proyecto Laravel
-
-## Requerimientos
+## Requirements
 
 * Docker
-* Docker Compose
-* Php
-* Composer
-* Postgres
+* docker-compose
 
+## Install
 
 ```sh
 sudo apt update
 apt install docker
 apt install docker-compose
 ```
-## Clonar el proyecto
+* Verificar la instalación
 
 ```sh
-git clone https://github.com/MUTUAL-DE-SERVICIOS-AL-POLICIA/DockerComposeTemplate
+docker --version
+docker-compose --version
 ```
 
-## Crear un nuevo proyecto en Laravel con el nombre src
+* Modificar los puertos de despliegue del archivo docker-compose.yml
 
-```sh
-composer create-project laravel/laravel src
-
-laravel new src
-```
-
-## Realizar las modificaciones de los nombres de red, puertos a usar y nombres de los contenedores en el proyecto que se encuentran en el archivo docker-compose.yml
-
-* networks
-* server
-* * ports:
-* * container_name
-* * networks
-* php
-* * ports:
-* * container_name
-* * networks
-* redis
-* * ports:
-* * container_name
-* * networks
-
-## levantar el proyecto
+* Levantar el proyecto
 
 ```sh
 docker-compose up -d
 ```
 
-## Verificar los contenedores
+* en caso de error con la configuración, modificar segun la necesidad y levantar nuevamente
+
+```sh
+docker-compose up -d --build
+```
+
+* Modificar el archivo `.env` de la carpeta src con las credenciales de acceso a la base de datos.
+
+* Verificar que los contenedores se encuentren funcionando:
 
 ```sh
 docker-compose ps -a
 ```
 
-## Ingresar al contenedor del proyecto
+* Instalar las dependencias del proyecto
 
 ```sh
 docker-compose exec php sh
+composer install
+```
+
+# Notas
+
+* Se pueden verificar los log's de los contenedores levantados o hacer seguimiento en caso de que algun contenedor genere algun error
+
+```sh
+docker-compose logs server
+
+docker-compose -f server
 ```

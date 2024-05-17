@@ -1,7 +1,7 @@
 version: '3'
 
 networks:
-  laravel:
+  beneficiary:
 
 
 services:
@@ -19,9 +19,9 @@ services:
     depends_on:
       - php
       - redis
-    container_name: docker-compose-template-server
+    container_name: docker-beneficiary-server
     networks:
-      - laravel
+      - beneficiary
 
   php:
     build:
@@ -34,15 +34,15 @@ services:
       - "9005:9000"
     volumes:
       - ./src:/var/www/html:delegated
-    container_name: docker-compose-template-php
+    container_name: docker-beneficiary-php
     networks:
-      - laravel
+      - beneficiary
 
   redis:
     image: redis:alpine
     restart: unless-stopped
     ports:
       - "6385:6379"
-    container_name: docker-compose-template-redis
+    container_name: docker-beneficiary-redis
     networks:
-      - laravel
+      - beneficiary
