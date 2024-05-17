@@ -1,0 +1,4 @@
+src/docs
+src/vendor
+src/.env
+composer.lock
