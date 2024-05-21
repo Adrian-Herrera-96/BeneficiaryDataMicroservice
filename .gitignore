@@ -1,4 +1,5 @@
 src/docs
 src/vendor
 src/.env
+src/.env.testing
 composer.lock
