@@ -28,8 +28,8 @@ return new class extends Migration
             $table->foreign('financial_entity_id')->references('id')->on('public.financial_entities');
 
             // Campos de la persona
-            $table->string('first_name',50)->nullable();
-            $table->string('second_name',50)->nullable();
+            $table->string('first_name',255)->nullable();
+            $table->string('second_name',255)->nullable();
             $table->string('last_name')->nullable();
             $table->string('mothers_last_name')->nullable();
             $table->string('surname_husband')->nullable();
@@ -45,7 +45,7 @@ return new class extends Migration
             $table->string('phone_number')->nullable();
             $table->string('cell_phone_number')->nullable();
             $table->unsignedBigInteger('nua')->nullable();
-            $table->integer('account_number')->nullable();
+            $table->bigInteger('account_number')->nullable();
             $table->enum('sigep_status', ['ACTIVO', 'ELABORADO', 'VALIDADO', 'SIN REGISTRO', 'REGISTRO OBSERVADO', 'ACTIVO-PAGO-VENTANILLA'])->nullable();
             $table->integer('id_person_senasir')->nullable()->unique();
             $table->date('date_last_contribution')->nullable();
