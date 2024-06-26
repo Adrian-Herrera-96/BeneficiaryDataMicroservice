@@ -12,16 +12,18 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('affiliates', function (Blueprint $table) {
-            $table->bigIncrements('id');
-            $table->string('registration',255)->nullable();
-            $table->string('type',255)->nullable();
-            $table->date('date_entry')->nullable();
-            $table->date('date_derelict')->nullable();
-            $table->string('reason_derelict',255)->nullable();
-            $table->integer('service_years')->nullable();
-            $table->integer('service_months')->nullable();
-            $table->text('unit_police_description')->nullable();
+            $table->bigIncrements('id')->comment("Identificador del registro.");
+            $table->bigInteger('affiliate_states_id')->comment("FK Identificador de la tabla afiliate_states");
+            $table->string('registration',255)->nullable()->comment("codigo de Matricula del afiliado");
+            $table->string('type',255)->nullable()->comment("información si el afiliado es de COMANDO o BATALLÓN ");
+            $table->date('date_entry')->nullable()->comment("fecha de ingreso a la institución policial");
+            $table->date('date_derelict')->nullable()->comment("fecha de abandono a la institución policial");
+            $table->string('reason_derelict',255)->nullable()->comment("registro de la causa de abandono");
+            $table->integer('service_years')->nullable()->comment("Años de servicio");
+            $table->integer('service_months')->nullable()->comment("Meses de servicio");
+            $table->text('unit_police_description')->nullable()->comment("Descripcion de la unidad policial a pepdido de la DESI");
             $table->timestamps();
+            $table->foreign("affiliate_states_id")->references('id')->on('affiliate_states');
         });
     }
 
