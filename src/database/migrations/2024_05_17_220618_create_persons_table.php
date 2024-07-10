@@ -34,10 +34,11 @@ return new class extends Migration
             $table->string('mothers_last_name')->nullable();
             $table->string('surname_husband')->nullable();
             $table->string('identity_card');
+            $table->bigInteger('city_identity_card_id')->nullable();
             $table->date('due_date')->nullable();
             $table->boolean('is_duedate_undefined')->default(false);
-            $table->enum('gender', ['M', 'F']);
-            $table->enum('civil_status', ['C', 'S', 'V', 'D']);
+            $table->enum('gender', ['M', 'F'])->nullable();
+            $table->enum('civil_status', ['C', 'S', 'V', 'D'])->nullable();
             $table->date('birth_date')->nullable();
             $table->date('date_death')->nullable();
             $table->string('death_certificate_number')->nullable();
@@ -49,9 +50,12 @@ return new class extends Migration
             $table->enum('sigep_status', ['ACTIVO', 'ELABORADO', 'VALIDADO', 'SIN REGISTRO', 'REGISTRO OBSERVADO', 'ACTIVO-PAGO-VENTANILLA'])->nullable();
             $table->integer('id_person_senasir')->nullable()->unique();
             $table->date('date_last_contribution')->nullable();
+            $table->uuid('uuid_column')->unique();
 
             $table->timestamps();
             $table->softDeletes();
+
+            $table->foreign('city_identity_card_id')->references('id')->on('public.cities');
         });
     }
 

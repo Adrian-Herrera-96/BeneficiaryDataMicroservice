@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('affiliates', function (Blueprint $table) {
             $table->bigIncrements('id')->comment("Identificador del registro.");
-            $table->bigInteger('affiliate_states_id')->comment("FK Identificador de la tabla afiliate_states");
+            $table->bigInteger('affiliate_states_id')->nullable()->comment("FK Identificador de la tabla afiliate_states");
             $table->string('registration',255)->nullable()->comment("codigo de Matricula del afiliado");
             $table->string('type',255)->nullable()->comment("información si el afiliado es de COMANDO o BATALLÓN ");
             $table->date('date_entry')->nullable()->comment("fecha de ingreso a la institución policial");
@@ -22,8 +22,22 @@ return new class extends Migration
             $table->integer('service_years')->nullable()->comment("Años de servicio");
             $table->integer('service_months')->nullable()->comment("Meses de servicio");
             $table->text('unit_police_description')->nullable()->comment("Descripcion de la unidad policial a pepdido de la DESI");
+            $table->bigInteger('unit_id');
+            $table->bigInteger('category_id');
+            $table->bigInteger('degree_id');
+            
+            $table->string('official',350);
+            $table->string('book',350);
+            $table->string('departure',350);
+            $table->date('marriage_date');
+
             $table->timestamps();
+
+            // Añadiendo relaciones
             $table->foreign("affiliate_states_id")->references('id')->on('affiliate_states');
+            $table->foreign('unit_id')->references('id')->on('public.units');
+            $table->foreign('category_id')->references('id')->on('public.categories');
+            $table->foreign('degree_id')->references('id')->on('public.degrees');
         });
     }
 
