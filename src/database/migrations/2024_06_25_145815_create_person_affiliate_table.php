@@ -16,11 +16,14 @@ return new class extends Migration
             $table->bigInteger('person_id');
             $table->string('type',255);
             $table->bigInteger('type_id');
+            $table->bigInteger('kinship_type');
             $table->boolean('state');
 
             $table->timestamps();
 
+            // Añadiendo relaciones
             $table->foreign('person_id')->references('id')->on('persons');
+            $table->foreign('kinship_type')->references('id')->on('public.kinships');
         });
 
     }
