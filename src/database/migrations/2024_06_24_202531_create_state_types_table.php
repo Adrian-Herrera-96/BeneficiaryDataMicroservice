@@ -11,7 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('state_types', function (Blueprint $table) {
+        Schema::create('beneficiaries.state_types', function (Blueprint $table) {
             $table->id()->comment("Campo donde se almacena el ID de la tabla");
             $table->string('name')->comment("Campo donde se almacena el tipo del estado de los afiliados");
             $table->timestamps();
