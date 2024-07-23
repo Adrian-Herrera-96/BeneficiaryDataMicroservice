@@ -14,9 +14,6 @@ return new class extends Migration
         Schema::create('persons', function (Blueprint $table) {
             $table->id();
 
-            // Llaves foráneas y relaciones
-            $table->unsignedBigInteger('affiliate_state_id')->nullable()->index();
-            $table->foreign('affiliate_state_id')->references('id')->on('public.affiliate_states');
 
             $table->unsignedBigInteger('city_birth_id')->nullable()->index();
             $table->foreign('city_birth_id')->references('id')->on('public.cities');
@@ -33,7 +30,7 @@ return new class extends Migration
             $table->string('last_name')->nullable();
             $table->string('mothers_last_name')->nullable();
             $table->string('surname_husband')->nullable();
-            $table->string('identity_card');
+            $table->string('identity_card')->unique();
             $table->bigInteger('city_identity_card_id')->nullable();
             $table->date('due_date')->nullable();
             $table->boolean('is_duedate_undefined')->default(false);
@@ -50,7 +47,7 @@ return new class extends Migration
             $table->enum('sigep_status', ['ACTIVO', 'ELABORADO', 'VALIDADO', 'SIN REGISTRO', 'REGISTRO OBSERVADO', 'ACTIVO-PAGO-VENTANILLA'])->nullable();
             $table->integer('id_person_senasir')->nullable()->unique();
             $table->date('date_last_contribution')->nullable();
-            $table->uuid('uuid_column')->unique();
+            // $table->uuid('uuid_column')->unique();
 
             $table->timestamps();
             $table->softDeletes();
