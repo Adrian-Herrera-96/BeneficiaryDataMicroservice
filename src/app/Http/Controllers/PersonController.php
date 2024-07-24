@@ -42,6 +42,9 @@ class PersonController extends Controller
      */
     public function update(UpdatePersonRequest $request, Person $person)
     {
+        $validatedData = $request->validated();
+        $person->update($validatedData);
+        return response()->json($person, 200);
     }
 
     /**
