@@ -10,11 +10,10 @@ class Person extends Model
 {
     use HasFactory;
     use SoftDeletes;
-    protected $table = 'persons'; 
+    protected $table = 'beneficiaries.persons';
 
     protected $fillable = [
 
-        'affiliate_state_id',
         'city_birth_id',
         'pension_entity_id',
         'financial_entity_id',
@@ -39,7 +38,6 @@ class Person extends Model
         'sigep_status',
         'id_person_senasir',
         'date_last_contribution'
-        
     ];
 
 }
