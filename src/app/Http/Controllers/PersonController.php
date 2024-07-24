@@ -2,7 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StorePersonRequest;
+use App\Http\Requests\UpdatePersonRequest;
 use App\Models\Person;
+use GuzzleHttp\Psr7\Response;
+use Illuminate\Database\Eloquent\Casts\Json;
 use Illuminate\Http\Request;
 
 class PersonController extends Controller
@@ -12,15 +16,15 @@ class PersonController extends Controller
      */
     public function index()
     {
-        //
+        $persons = Person::all();
+        return response()->json(['data' => $persons], 200);
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(StorePersonRequest $request)
     {
-        //
     }
 
     /**
@@ -34,9 +38,8 @@ class PersonController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Person $person)
+    public function update(UpdatePersonRequest $request, Person $person)
     {
-        //
     }
 
     /**
