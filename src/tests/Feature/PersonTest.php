@@ -180,3 +180,18 @@ it('can create a person', function () {
     }
     $response->assertStatus(201);
 });
+
+///UPDATE
+it('can update person', function(){
+    $this->withoutExceptionHandling();
+    $person = Person::factory()->create();
+    $allData = Person::factory()->make()->toArray();
+    $randomFields = Arr::only($allData, array_rand($allData, rand(5, count($allData))));
+    $validator = Validator::make($randomFields, (new \App\Http\Requests\UpdatePersonRequest)->rules());
+    if ($validator->fails()) {
+        throw new \Illuminate\Validation\ValidationException($validator);
+    }
+    $response = $this->putJson('/api/persons/' . $person->id, $randomFields);
+    $response->assertStatus(200);
+    $this->assertDatabaseHas('persons', array_merge(['id' => $person->id], $randomFields));
+});
