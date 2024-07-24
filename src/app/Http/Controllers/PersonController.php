@@ -25,6 +25,8 @@ class PersonController extends Controller
      */
     public function store(StorePersonRequest $request)
     {
+        $person = Person::create($request->all());
+        return response()->json($person, 201);
     }
 
     /**
